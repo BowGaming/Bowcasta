@@ -6,7 +6,7 @@ class ReviewCog(commands.Cog) :
     def __init__(self, bot) :
         self.bot = bot
     
-        self.review_channel_id = 123456789012345678  
+        self.review_channel_id = 1424723487955619840  
     
         self.review_format_embed = (
             Embed(
