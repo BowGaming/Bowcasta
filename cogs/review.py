@@ -28,28 +28,28 @@ class ReviewCog(commands.Cog) :
 
         @commands.Cog.listener()
         async def on_message(self, message) :
-        """Checks messages in the review channel and enforces format."""
-        if message.author.bot :
-            return
-    
-            if message.channel.id != self.review_channel_id :
+            """Checks messages in the review channel and enforces format."""
+            if message.author.bot :
                 return
-    
-                # Check for required keywords
-                required_keywords = ["rating", "length", "review"]
-                if not all(keyword in message.content.lower() for keyword in required_keywords) :
-                    await message.delete()
+        
+                if message.channel.id != self.review_channel_id :
                     return
-    
-                    # Remove previous embed messages from bot to keep latest at bottom
-                    async for msg in message.channel.history(limit = 3) :
-                    if msg.author == self.bot.user :
-                        await msg.delete()
-    
-                        # Send new embed to appear at bottom
-                        await message.channel.send(embed = self.review_format_embed)
-    
-    
-                        async def setup(bot: commands.Bot) :
-                        """Standard setup function for discord.py cogs."""
-                        await bot.add_cog(ReviewChannel(bot))
+        
+                    # Check for required keywords
+                    required_keywords = ["rating", "length", "review"]
+                    if not all(keyword in message.content.lower() for keyword in required_keywords) :
+                        await message.delete()
+                        return
+        
+                        # Remove previous embed messages from bot to keep latest at bottom
+                        async for msg in message.channel.history(limit = 3) :
+                        if msg.author == self.bot.user :
+                            await msg.delete()
+        
+                            # Send new embed to appear at bottom
+                            await message.channel.send(embed = self.review_format_embed)
+        
+        
+                            async def setup(bot: commands.Bot) :
+                            """Standard setup function for discord.py cogs."""
+                            await bot.add_cog(ReviewChannel(bot))
