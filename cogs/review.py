@@ -8,6 +8,7 @@ class ReviewCog(commands.Cog) :
     
         self.review_channel_id = 1424723487955619840  
     
+        # Sticky message
         self.review_format_embed = (
             Embed(
                 title = "**Review Format**",
@@ -21,7 +22,7 @@ class ReviewCog(commands.Cog) :
                 )
             .add_field(
                 name = "**Please follow the above template.**",
-                value = "Your message will be removed if it doesn't match the format.",
+                value = "Your message will be removed if it doesn't match the format. Please only write reviews for full runs/events/collected editions/stories, and not for individual issues (unless the individual issue in question is a one-shot).",
                 inline = False,
                 )
             )
