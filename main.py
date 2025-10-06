@@ -16,17 +16,17 @@ class Jocasta(commands.Bot):
     async def setup_hook(self):
         initial_extensions = [
             # "funcs.postgresql",
-            "cogs.owner",
-            "cogs.polls",
-            "cogs.time",
-            "cogs.news",
-            "cogs.fun",
-            "cogs.raidlog",
-            "cogs.emoji",
-            "cogs.modping",
-            "cogs.movies",
-            "cogs.embed",
-            "cogs.docs",
+            # "cogs.owner",
+            # "cogs.polls",
+            # "cogs.time",
+            # "cogs.news",
+            # "cogs.fun",
+            # "cogs.raidlog",
+            # "cogs.emoji",
+            # "cogs.modping",
+            # "cogs.movies",
+            # "cogs.embed",
+            # "cogs.docs",
             "cogs.review",
             # 'cogs.betatesting'
         ]
