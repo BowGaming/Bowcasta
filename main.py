@@ -1,7 +1,13 @@
 import discord
 from discord.ext import commands
 
-from config import *
+from dotenv import load_dotenv
+import os
+
+load_dotenv()  # loads variables from .env
+TOKEN = os.getenv("DISCORD_TOKEN")
+BOT_PREFIX = os.getenv("BOT_PREFIX", "!")  # fallback to "!" if not set
+
 
 import datetime
 
