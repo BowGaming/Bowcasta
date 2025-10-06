@@ -50,6 +50,6 @@ class ReviewCog(commands.Cog) :
             await message.channel.send(embed = self.review_format_embed)
             
             
-        async def setup(bot: commands.Bot) :
-            """Standard setup function for discord.py cogs."""
-            await bot.add_cog(ReviewCog(bot))
+async def setup(bot: commands.Bot) :
+    """Standard setup function for discord.py cogs."""
+    await bot.add_cog(ReviewCog(bot))
