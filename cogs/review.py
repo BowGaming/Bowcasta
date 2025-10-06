@@ -43,13 +43,13 @@ class ReviewCog(commands.Cog) :
         
                         # Remove previous embed messages from bot to keep latest at bottom
                         async for msg in message.channel.history(limit = 3) :
-                        if msg.author == self.bot.user :
-                            await msg.delete()
-        
-                            # Send new embed to appear at bottom
-                            await message.channel.send(embed = self.review_format_embed)
-        
-        
-                            async def setup(bot: commands.Bot) :
-                            """Standard setup function for discord.py cogs."""
-                            await bot.add_cog(ReviewChannel(bot))
+                            if msg.author == self.bot.user :
+                                await msg.delete()
+            
+                                # Send new embed to appear at bottom
+                                await message.channel.send(embed = self.review_format_embed)
+            
+            
+                                async def setup(bot: commands.Bot) :
+                                    """Standard setup function for discord.py cogs."""
+                                    await bot.add_cog(ReviewChannel(bot))
