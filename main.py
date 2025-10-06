@@ -15,7 +15,7 @@ import datetime
 class Jocasta(commands.Bot):
     async def setup_hook(self):
         initial_extensions = [
-            "funcs.postgresql",
+            # "funcs.postgresql",
             "cogs.owner",
             "cogs.polls",
             "cogs.time",
