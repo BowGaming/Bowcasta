@@ -59,6 +59,8 @@ class ReviewCog(commands.Cog) :
             
             await message.delete()
             return
+            
+        await message.add_reaction("<:Marveljingjang:1425145445013000232>")
         
         # Remove previous embed messages from bot to keep latest at bottom
         async for msg in message.channel.history(limit = 3) :
@@ -66,8 +68,7 @@ class ReviewCog(commands.Cog) :
                 await msg.delete()
             
         # Send new embed to appear at bottom
-        await message.channel.send(embed = self.review_format_embed)
-            
+        await message.channel.send(embed = self.review_format_embed)            
             
 async def setup(bot: commands.Bot) :
     """Standard setup function for discord.py cogs."""
