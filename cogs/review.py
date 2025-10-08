@@ -43,7 +43,7 @@ class ReviewCog(commands.Cog) :
         pattern = re.compile(
             r"(?:##\s*.+)?\s*"                              # Optional markdown header
             r"\*\*year and writer:\*\*.+?"                  # Required header and content
-            r"\*\*rating:\*\*\s*\d+\/10.+?"                 # Rating line like "Rating: 8/10"
+            r"\*\*rating:\*\*.+?"                           # Rating line like "Rating: 8/10"
             r"\*\*review:\*\*.+",                           # Review section
             re.IGNORECASE | re.DOTALL
         )
@@ -83,12 +83,17 @@ class ReviewCog(commands.Cog) :
         await message.add_reaction("<:Marveljingjang:1425145445013000232>")
 
         # Create a thread for discussion
+        # Extract comic name from first line (if formatted like "## Comic Name")
+        first_line = message.content.strip().split("\n", 1)[0]
+        comic_name = first_line.replace("##", "").strip() if first_line.startswith("##") else "Untitled Comic"
+
+        # Create a thread for discussion
         try:
             thread = await message.create_thread(
-                name=f"Discussion: {message.author.display_name}'s review",
-                auto_archive_duration=4320  # 7 days
+                name=f"Review: {comic_name} by {message.author.display_name}",
+                auto_archive_duration=4320  # 3 days
             )
-            await thread.send(f"Thread for discussing {message.author.display_name}'s review!")
+            await thread.send(f"Thread for discussing **{comic_name}**, reviewed by {message.author.display_name}!")
         except Exception as e:
             print(f"Failed to create thread: {e}")
             
