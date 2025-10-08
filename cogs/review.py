@@ -21,12 +21,11 @@ class ReviewCog(commands.Cog) :
         )
 
         self.review_format_embed = Embed(
-            title="**Review Format**",
             description=(
                 "```\n## Comic Name\n"
                 "**Year and writer:**\n"
                 "**Rating:** x/10\n"
-                "**Length:** x issues or x pages or something similar\n"
+                "**Length:** x issues or x pages or something similar (not required, you may skip this if you want)\n"
                 "**Review:** A few words about your thoughts on the comic and why you gave it that rating\n```"
             ),
         )
