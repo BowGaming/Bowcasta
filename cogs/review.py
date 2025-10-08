@@ -20,13 +20,15 @@ class ReviewCog(commands.Cog) :
             ),
         )
 
-        self.review_format_embed = Embed(
-            description=(
-                "```\n## Comic Name\n"
-                "**Year and writer:**\n"
-                "**Rating:** x/10\n"
-                "**Review:** A few words about your thoughts on the comic and why you gave it that rating. You could include details such as the length of the book, quality of the art, required background reading, etc.\n```"
-            ),
+        format_message = (
+            "**Review Format:**\n"
+            "```\n"
+            "## Comic Name\n"
+            "**Year and writer:**\n"
+            "**Rating:** x/10\n"
+            "**Length:** x issues or x pages or something similar\n"
+            "**Review:** A few words about your thoughts on the comic and why you gave it that rating\n"
+            "```"
         )
 
     @commands.Cog.listener()
@@ -76,7 +78,7 @@ class ReviewCog(commands.Cog) :
             
         # Send sticky embeds at bottom
         await message.channel.send(embed=self.review_instruction_embed)
-        await message.channel.send(embed=self.review_format_embed)
+        await message.channel.send(format_message)
 
         # Add reaction to passed messages
         await message.add_reaction("<:Marveljingjang:1425145445013000232>")
