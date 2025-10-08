@@ -1,6 +1,6 @@
 from discord.ext import commands
 from discord import Embed, Forbidden
-
+import re
 
 class ReviewCog(commands.Cog) :
     def __init__(self, bot) :
@@ -8,24 +8,28 @@ class ReviewCog(commands.Cog) :
     
         self.review_channel_id = 1424723487955619840  
     
-        # Sticky message
-        self.review_format_embed = (
-            Embed(
-                title = "**Review Format**",
-                description = (
-                    "Use the following template to post.\n"
-                    "```\n## Comic Name\n"
-                    "**Rating:** x/10\n"
-                    "**Length:** x issues or x pages or something similar\n"
-                    "**Review:** A few words about your thoughts on the comic and why you gave it that rating```"
-                    ),
-                )
-            .add_field(
-                name = "**Please follow the above template.**",
-                value = "Your message will be removed if it doesn't match the format.\nPlease **only** write reviews for full runs/events/collected editions/stories, and not for individual issues (unless the individual issue in question is a one-shot).",
-                inline = False,
-                )
-            )
+        # Sticky messages
+        self.review_instruction_embed = Embed(
+            title="**How to Post Reviews**",
+            description=(
+                "Please follow the format below when writing your review.\n"
+                "Your message will be deleted if it doesn't follow the format.\n\n"
+                "**Notes:**\n"
+                "- Only post reviews for full runs, collected editions, or one-shots.\n"
+                "- No individual issue reviews (unless it's a one-shot)."
+            ),
+        )
+
+        self.review_format_embed = Embed(
+            title="**Review Format**",
+            description=(
+                "```\n## Comic Name\n"
+                "**Year and writer:**\n"
+                "**Rating:** x/10\n"
+                "**Length:** x issues or x pages or something similar\n"
+                "**Review:** A few words about your thoughts on the comic and why you gave it that rating\n```"
+            ),
+        )
 
     @commands.Cog.listener()
     async def on_message(self, message) :
@@ -36,9 +40,16 @@ class ReviewCog(commands.Cog) :
         if message.channel.id != self.review_channel_id :
             return
         
-        # Check for required keywords
-        required_keywords = ["rating", "length", "review"]
-        if not all(keyword in message.content.lower() for keyword in required_keywords) :
+        # Regex pattern to match section headers (## or bold headers)
+        pattern = re.compile(
+            r"(?:##\s*.+)?\s*"                              # Optional markdown header
+            r"\*\*year and writer:\*\*.+?"                  # Required header and content
+            r"\*\*rating:\*\*\s*\d+\/10.+?"                 # Rating line like "Rating: 8/10"
+            r"\*\*review:\*\*.+",                           # Review section
+            re.IGNORECASE | re.DOTALL
+        )
+
+        if not pattern.search(message.content):
 
             try:
                 # Try to DM the user before deleting the message
@@ -61,15 +72,26 @@ class ReviewCog(commands.Cog) :
             return
         
         # Remove previous embed messages from bot to keep latest at bottom
-        async for msg in message.channel.history(limit = 3) :
+        async for msg in message.channel.history(limit = 5) :
             if msg.author == self.bot.user :
                 await msg.delete()
             
-        # Send new embed to appear at bottom
-        await message.channel.send(embed = self.review_format_embed)    
+        # Send sticky embeds at bottom
+        await message.channel.send(embed=self.review_instruction_embed)
+        await message.channel.send(embed=self.review_format_embed)
 
         # Add reaction to passed messages
         await message.add_reaction("<:Marveljingjang:1425145445013000232>")
+
+        # Create a thread for discussion
+        try:
+            thread = await message.create_thread(
+                name=f"Discussion: {message.author.display_name}'s review",
+                auto_archive_duration=4320  # 7 days
+            )
+            await thread.send(f"Thread for discussing {message.author.display_name}'s review!")
+        except Exception as e:
+            print(f"Failed to create thread: {e}")
             
 async def setup(bot: commands.Bot) :
     """Standard setup function for discord.py cogs."""
