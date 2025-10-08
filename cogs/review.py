@@ -41,7 +41,7 @@ class ReviewCog(commands.Cog) :
         
         # Regex pattern to match section headers (## or bold headers)
         pattern = re.compile(
-            r"(?:##\s*.+)?\s*"                              # Optional markdown header
+            # r"(?:##\s*.+)?\s*"                              # Optional markdown header
             r"\*\*year and writer:\*\*.+?"                  # Required header and content
             r"\*\*rating:\*\*.+?"                           # Rating line like "Rating: 8/10"
             r"\*\*review:\*\*.+",                           # Review section
