@@ -21,7 +21,6 @@ class ReviewCog(commands.Cog) :
         )
 
         self.format_message = (
-            "**Review Format:**\n"
             "```\n"
             "## Comic Name\n"
             "**Year and writer:**\n"
