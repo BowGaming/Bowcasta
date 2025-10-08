@@ -41,7 +41,7 @@ class ReviewCog(commands.Cog) :
         
         # Regex pattern to match section headers (## or bold headers)
         pattern = re.compile(
-            # r"(?:##\s*.+)?\s*"                              # Optional markdown header
+            r"(:##\s*.+)?\s*"                              # Optional markdown header
             r"\*\*year and writer:\*\*.+?"                  # Required header and content
             r"\*\*rating:\*\*.+?"                           # Rating line like "Rating: 8/10"
             r"\*\*review:\*\*.+",                           # Review section
@@ -83,19 +83,17 @@ class ReviewCog(commands.Cog) :
         await message.add_reaction("<:Marveljingjang:1425145445013000232>")
 
         # Create a thread for discussion
-        # Extract comic name from first line (if formatted like "## Comic Name")
         first_line = message.content.strip().split("\n", 1)[0]
-        comic_name = first_line.replace("##", "").strip() if first_line.startswith("##") else "Untitled Comic"
+        comic_name = first_line.replace("##", "").strip()
 
-        # Create a thread for discussion
-        try:
-            thread = await message.create_thread(
-                name=f"Review: {comic_name} by {message.author.display_name}",
-                auto_archive_duration=4320  # 3 days
-            )
-            await thread.send(f"Thread for discussing **{comic_name}**, reviewed by {message.author.display_name}!")
-        except Exception as e:
-            print(f"Failed to create thread: {e}")
+        thread = await message.create_thread(
+            name=f"Review: {comic_name} by {message.author.display_name}",
+            auto_archive_duration=4320  # 3 days
+        )
+
+        await thread.send(
+            f"Thread for discussing **{comic_name}**, reviewed by {message.author.display_name}!"
+        )
             
 async def setup(bot: commands.Bot) :
     """Standard setup function for discord.py cogs."""
