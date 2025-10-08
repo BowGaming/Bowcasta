@@ -78,7 +78,7 @@ class ReviewCog(commands.Cog) :
             
         # Send sticky embeds at bottom
         await message.channel.send(embed=self.review_instruction_embed)
-        await message.channel.send(format_message)
+        await message.channel.send(content=format_message)
 
         # Add reaction to passed messages
         await message.add_reaction("<:Marveljingjang:1425145445013000232>")
