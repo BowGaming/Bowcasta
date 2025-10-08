@@ -25,8 +25,7 @@ class ReviewCog(commands.Cog) :
                 "```\n## Comic Name\n"
                 "**Year and writer:**\n"
                 "**Rating:** x/10\n"
-                "**Length:** x issues or x pages or something similar (not required, you may skip this if you want)\n"
-                "**Review:** A few words about your thoughts on the comic and why you gave it that rating\n```"
+                "**Review:** A few words about your thoughts on the comic and why you gave it that rating. You could include details such as the length of the book, quality of the art, required background reading, etc.\n```"
             ),
         )
 
