@@ -40,15 +40,35 @@ class ReviewCog(commands.Cog) :
             return
         
         # Regex pattern to match section headers (## or bold headers)
-        pattern = re.compile(
-            r"##\s*.+\s*"                                   # Markdown header
-            r"\*\*year and writer:\*\*.+?"                  # Required header and content
-            r"\*\*rating:\*\*.+?"                           # Rating line like "Rating: 8/10"
-            r"\*\*review:\*\*.+",                           # Review section
-            re.IGNORECASE | re.DOTALL
-        )
+      #  pattern = re.compile(
+       #     r"##\s*.+\s*"                                   # Markdown header
+      #      r"\*\*year and writer:\*\*.+?"                  # Required header and content
+     #       r"\*\*rating:\*\*.+?"                           # Rating line like "Rating: 8/10"
+      #      r"\*\*review:\*\*.+",                           # Review section
+    #        re.IGNORECASE | re.DOTALL
+    #    )
 
-        if not pattern.search(message.content):
+      #  if not pattern.search(message.content):
+
+        # Define individual regex patterns for each required section
+        patterns = {
+            "header": re.compile(r"^##\s*.+$", re.IGNORECASE | re.MULTILINE),
+            "year_writer": re.compile(r"\*\*year and writer:\*\*\s*.{1,250}", re.IGNORECASE),
+            "rating": re.compile(r"\*\*rating:\*\*\s*.{1,250}", re.IGNORECASE),
+            "review": re.compile(r"\*\*review:\*\*\s*.{1,250}", re.IGNORECASE),
+        }
+
+        # Function to validate message format
+        def is_valid_format(message: str) -> bool:
+            """
+            Checks if the message matches all required format sections.
+            Returns True if all sections are present, False otherwise.
+            """
+            return all(p.search(message) for p in patterns.values())
+        
+        
+        # Usage example inside your event handler
+        if not is_valid_format(message.content):
 
             try:
                 # Try to DM the user before deleting the message
