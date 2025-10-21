@@ -52,10 +52,10 @@ class ReviewCog(commands.Cog) :
 
         # Define individual regex patterns for each required section
         patterns = {
-            "header": re.compile(r"^##\s*.+$", re.IGNORECASE | re.MULTILINE),
-            "year_writer": re.compile(r"\*\*year and writer:\*\*\s*.{1,250}", re.IGNORECASE),
-            "rating": re.compile(r"\*\*rating:\*\*\s*.{1,250}", re.IGNORECASE),
-            "review": re.compile(r"\*\*review:\*\*\s*.{1,250}", re.IGNORECASE),
+            "header": re.compile(r"^##\s*.+$", re.IGNORECASE),
+            "year_writer": re.compile(r"\*\*year and writer:\*\*\s*.{1,200}", re.IGNORECASE),
+            "rating": re.compile(r"\*\*rating:\*\*\s*.{1,200}", re.IGNORECASE),
+            "review": re.compile(r"\*\*review:\*\*\s*.{1,200}", re.IGNORECASE),
         }
 
         # Function to validate message format
