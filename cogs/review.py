@@ -63,7 +63,7 @@ class ReviewCog(commands.Cog) :
                     f"Hey {message.author.display_name},\n\n{reason}\n"
                 )
                 await message.author.send(
-                    f"```\n{message.content[:1900]}\n```"
+                    f"```\n{message.content[:1992]}\n```"
                 )
             except Forbidden:
                 # User has DMs disabled or blocked the bot
