@@ -61,6 +61,8 @@ class ReviewCog(commands.Cog) :
         
                 await message.author.send(
                     f"Hey {message.author.display_name},\n\n{reason}\n"
+                )
+                await message.author.send(
                     f"```\n{message.content[:1900]}\n```"
                 )
             except Forbidden:
