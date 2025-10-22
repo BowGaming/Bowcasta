@@ -28,6 +28,7 @@ class Jocasta(commands.Bot):
             # "cogs.embed",
             # "cogs.docs",
             "cogs.review",
+            "cogs.spoilerthread",
             # 'cogs.betatesting'
         ]
 
