@@ -11,7 +11,7 @@ class SpoilerThreadCog(commands.Cog) :
         self.thread_request_embed = Embed(
             title="**Request Spoiler Threads**",
             description=(
-                "Here you can request spoiler threads about new movies/shows/games! Simply state the title of whatever you want a thread for.\n" 
+                "Here you can request spoiler threads about new movies/shows/games! Simply state the title of whatever you want a thread for.\n\n" 
                 "Please ***only*** request a thread if you **intent to use it!**"
             ),
         )
