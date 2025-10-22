@@ -5,7 +5,7 @@ class SpoilerThreadCog(commands.Cog) :
     def __init__(self, bot) :
         self.bot = bot
     
-        self.review_channel_id = 1430534917401477162
+        self.review_channel_id = 1430538629918494863
     
         # Sticky messages
         self.thread_request_embed = Embed(
