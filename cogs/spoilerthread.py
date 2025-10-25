@@ -28,7 +28,7 @@ class SpoilerThreadCog(commands.Cog) :
             return   
         
         # Remove previous embed messages from bot to keep latest at bottom
-       async for msg in message.channel.history(limit=5) :
+        async for msg in message.channel.history(limit=5) :
             if msg.author == self.bot.user and msg.embeds :
                 embed = msg.embeds[0]
                 if embed.title == self.thread_request_embed.title :
