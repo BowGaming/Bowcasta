@@ -225,7 +225,4 @@ async def setup(bot: commands.Bot):
     cog = SpoilerThreadCog(bot)
     print("Groups discovered:", [a for a in dir(cog.__class__) if isinstance(getattr(cog.__class__, a), app_commands.Group)])
     await bot.add_cog(cog)
-
-    # Sync the slash commands for this cog immediately
-    bot.tree.add_command(cog.spoiler_threads)  # add the group to the bot tree
     await bot.tree.sync()  
