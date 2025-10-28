@@ -33,7 +33,7 @@ class Jocasta(commands.Bot):
         ]
 
         for extension in initial_extensions:
-            await bot.load_extension(extension)
+            await self.load_extension(extension)
 
 
 intents = discord.Intents.all()
