@@ -22,7 +22,8 @@ class SpoilerThreadCog(commands.Cog) :
         tmdb.API_KEY = os.getenv("TMDB_KEY")
         self.search = tmdb.Search()
         
-        self.request_spoiler_thread_id = 1430538629918494863
+        self.request_spoiler_thread_id = 1432707468382965973
+        spoiler_thread_channel = 1432707413181599775
     
         # Sticky messages
         self.thread_request_embed = Embed(
@@ -180,7 +181,7 @@ class SpoilerThreadCog(commands.Cog) :
         except Exception:
             poster_file = None
 
-        forum: discord.ForumChannel = self.bot.get_channel(request_spoiler_thread_id)
+        forum: discord.ForumChannel = self.bot.get_channel(spoiler_thread_channel)
 
         tag = next(
             i
