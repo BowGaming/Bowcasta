@@ -1,6 +1,5 @@
 from discord.ext import commands
 from discord import Embed
-import config
 
 import datetime
 import io
