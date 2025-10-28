@@ -226,24 +226,5 @@ async def setup(bot: commands.Bot):
     print("Groups discovered:", [a for a in dir(cog.__class__) if isinstance(getattr(cog.__class__, a), app_commands.Group)])
     await bot.add_cog(cog)
 
-    # Create the group manually
-    spoiler_group = app_commands.Group(
-        name="spoiler-thread",
-        description="Add spoiler threads!",
-        guild_ids=[689387320142463032]
-    )
-
-    # Attach commands manually
-    @spoiler_group.command(name="movie")
-    @app_commands.describe(title="Movie to search for")
-    async def st_movie(interaction: discord.Interaction, title: str):
-        await cog.add_spoiler_thread(interaction, title, "movie")
-
-    @spoiler_group.command(name="tv")
-    @app_commands.describe(title="TV show to search for")
-    async def st_tv(interaction: discord.Interaction, title: str):
-        await cog.add_spoiler_thread(interaction, title, "tv")
-
-    # Add group to bot and sync
-    bot.tree.add_command(spoiler_group)
-    await bot.tree.sync()
+    # Sync the commands (guild-only recommended for testing)
+    await bot.tree.sync(guild=discord.Object(id=689387320142463032))
