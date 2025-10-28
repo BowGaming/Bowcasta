@@ -180,7 +180,7 @@ class SpoilerThreadCog(commands.Cog) :
         except Exception:
             poster_file = None
 
-        forum: discord.ForumChannel = self.bot.get_channel(spoiler_thread_channel)
+        forum: discord.ForumChannel = self.bot.get_channel(request_spoiler_thread_id)
 
         tag = next(
             i
