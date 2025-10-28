@@ -54,6 +54,7 @@ class SpoilerThreadCog(commands.Cog) :
         # Send sticky embeds at bottom
         await message.channel.send(embed=self.thread_request_embed)
 
+    # /spoiler-thread commands
     spoiler_threads = app_commands.Group(
         name="spoiler-thread",
         description="Add spoiler threads!",
@@ -221,4 +222,6 @@ class SpoilerThreadCog(commands.Cog) :
 
             
 async def setup(bot: commands.Bot) :
-    await bot.add_cog(SpoilerThreadCog(bot))
+    cog = SpoilerThreadCog(bot)
+    print("Groups discovered:", [a for a in dir(cog.__class__) if isinstance(getattr(cog.__class__, a), app_commands.Group)])
+    await bot.add_cog(cog)
