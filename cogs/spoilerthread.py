@@ -58,7 +58,7 @@ class SpoilerThreadCog(commands.Cog) :
     spoiler_threads = app_commands.Group(
         name="spoiler-thread",
         description="Add spoiler threads!",
-        guild_ids=689387320142463032,
+        guild_ids=[689387320142463032],
         default_permissions=Permissions(manage_messages=True),
     )
 
