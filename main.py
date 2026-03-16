@@ -30,6 +30,7 @@ class Jocasta(commands.Bot):
             "cogs.review",
             "cogs.spoilerthread",
             # 'cogs.betatesting'
+            "cogs.dakennono",
         ]
 
         for extension in initial_extensions:
