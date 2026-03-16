@@ -15,7 +15,7 @@ class AkihiroCog(commands.Cog) :
         )
 
         # Ignored channels due to title reasons
-        IGNORED_CHANNELS = [1424723487955619840,689387320142463035]
+        IGNORED_CHANNELS = {1424723487955619840,689387320142463035}
 
     @commands.Cog.listener()
     async def on_message(self, message) :
