@@ -16,6 +16,8 @@ class AkihiroCog(commands.Cog) :
 
         # Ignored channels due to title reasons
         self.ignored_channels = {1424723487955619840,689387320142463035,1483188598688976978}
+        self.ignored_forums = {1432707413181599775}
+
 
     @commands.Cog.listener()
     async def on_message(self, message) :
@@ -24,6 +26,8 @@ class AkihiroCog(commands.Cog) :
             return
 
         if message.channel.id in self.ignored_channels:
+            return
+        if message.channel.parent_id in self.ignored_forums:
             return
             
         if "daken" in message.content.lower():
