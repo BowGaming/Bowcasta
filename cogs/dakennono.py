@@ -27,7 +27,7 @@ class AkihiroCog(commands.Cog) :
 
         if message.channel.id in self.ignored_channels:
             return
-        if message.channel.parent.id in self.ignored_forums:
+        if message.channel.parent and message.channel.parent.id in self.ignored_forums:
             return
             
         if "daken" in message.content.lower():
