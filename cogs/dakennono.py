@@ -26,14 +26,14 @@ class AkihiroCog(commands.Cog) :
         if message.author.bot :
             return
 
-    # Ignore normal channels
-    if isinstance(message.channel, TextChannel):
-        if message.channel.id in self.ignored_channels:
-            return
-    # Ignore threads inside forums
-    if isinstance(message.channel, Thread):
-        if message.channel.parent and message.channel.parent.id in self.ignored_forums:
-            return
+        # Ignore normal channels
+        if isinstance(message.channel, TextChannel):
+            if message.channel.id in self.ignored_channels:
+                return
+        # Ignore threads inside forums
+        if isinstance(message.channel, Thread):
+            if message.channel.parent and message.channel.parent.id in self.ignored_forums:
+                return
             
         if "daken" in message.content.lower():
           await message.reply(embed=self.akihiro_message)
