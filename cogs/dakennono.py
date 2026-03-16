@@ -19,5 +19,6 @@ class AkihiroCog(commands.Cog) :
         """Checks messages in the review channel and enforces format."""
         if message.author.bot :
             return
-          
+            
+        if "daken" in message.content.lower():
           await message.channel.send(embed=self.akihiro_message)
