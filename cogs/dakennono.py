@@ -14,10 +14,16 @@ class AkihiroCog(commands.Cog) :
             ),
         )
 
+        # Ignored channels due to title reasons
+        IGNORED_CHANNELS = [1424723487955619840,689387320142463035]
+
     @commands.Cog.listener()
     async def on_message(self, message) :
         """Checks messages in the review channel and enforces format."""
         if message.author.bot :
+            return
+
+        if message.channel.id in IGNORED_CHANNELS:
             return
             
         if "daken" in message.content.lower():
