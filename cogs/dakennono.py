@@ -21,7 +21,7 @@ class AkihiroCog(commands.Cog) :
             return
             
         if "daken" in message.content.lower():
-          await message.channel.send(embed=self.akihiro_message)
+          await message.reply(embed=self.akihiro_message)
 
 async def setup(bot: commands.Bot) :
     """Standard setup function for discord.py cogs."""
