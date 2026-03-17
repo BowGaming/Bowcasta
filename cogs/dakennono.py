@@ -43,13 +43,16 @@ class AkihiroCog(commands.Cog) :
     
         # @everyone permission check
         everyone_role = guild.default_role
-    
+        
         if isinstance(channel, Thread):
             parent = channel.parent
-            if parent and parent.permissions_for(everyone_role).send_messages:
-                return True
+            if parent:
+                overwrite = parent.overwrites_for(everyone_role)
+                if overwrite.send_messages is not False:
+                    return True
         else:
-            if channel.permissions_for(everyone_role).send_messages:
+            overwrite = channel.overwrites_for(everyone_role)
+            if overwrite.send_messages is not False:
                 return True
     
         return False
