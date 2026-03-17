@@ -44,13 +44,13 @@ class AkihiroCog(commands.Cog) :
         # @everyone permission check
         everyone_role = guild.default_role
 
-        def everyone_can_talk(self, ch, everyone_role):
-            overwrite = ch.overwrites_for(everyone_role)
+    def everyone_can_talk(self, ch, everyone_role):
+        overwrite = ch.overwrites_for(everyone_role)
         
-            return (
-                overwrite.send_messages is not False and
-                overwrite.send_messages_in_threads is not False
-            )
+        return (
+            overwrite.send_messages is not False and
+            overwrite.send_messages_in_threads is not False
+        )
         
         if isinstance(channel, Thread):
             parent = channel.parent
