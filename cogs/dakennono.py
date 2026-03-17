@@ -64,7 +64,7 @@ class AkihiroCog(commands.Cog) :
             return
 
         # Ignore normal channels
-        if self.is_blocked_channel(message.channel):
+        if not self.is_blocked_channel(message.channel):
             return
             
         if "daken" not in message.content.lower():
