@@ -19,7 +19,7 @@ class AkihiroCog(commands.Cog) :
         # Manual overrides for blocking/allowing channels
         self.blocked_channels = {}
         self.allowed_channels = {689387320142463035}
-        self.blocked_forums = {1432707413181599775}
+        self.blocked_forums = {}
         self.allowed_forums = {}
 
         # Cooldown duration in seconds
