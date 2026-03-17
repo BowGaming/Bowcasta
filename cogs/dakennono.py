@@ -27,7 +27,7 @@ class AkihiroCog(commands.Cog) :
         self.last_executed = {}
 
     def everyone_can_talk(self, ch, everyone_role):
-        overwrite = ch.permissions_for(everyone_role)
+        overwrite = ch.overwrites_for(everyone_role)
         
         return (
             overwrite.send_messages is not False and
