@@ -59,24 +59,26 @@ class AkihiroCog(commands.Cog) :
         """Checks messages in the review channel and enforces format."""
         if message.author.bot :
             return
+
+        # Ignore normal channels
+        if self.is_blocked_channel(message.channel):
+            return
             
         if "daken" not in message.content.lower():
             return
 
-        # Ignore normal channels
-        if self.is_blocked_channel(message.channel):
-            channel_id = message.channel.id
+        channel_id = message.channel.id
     
-            # cooldown check
-            now = time.time()
-            last_time = self.last_executed.get(channel_id, 0)
-            if now - last_time < self.cooldown_seconds:
-                return  # still in cooldown
+        # cooldown check
+        now = time.time()
+        last_time = self.last_executed.get(channel_id, 0)
+        if now - last_time < self.cooldown_seconds:
+            return  # still in cooldown
     
-            await message.reply(embed=self.akihiro_message)
+        await message.reply(embed=self.akihiro_message)
     
-            # update last time used
-            self.last_executed[channel_id] = now
+        # update last time used
+        self.last_executed[channel_id] = now
         
 async def setup(bot: commands.Bot) :
     """Standard setup function for discord.py cogs."""
