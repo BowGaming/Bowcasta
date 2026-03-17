@@ -40,9 +40,6 @@ class AkihiroCog(commands.Cog) :
             return True
         if isinstance(channel, Thread) and channel.parent and channel.parent.id in self.blocked_forums:
             return True
-    
-        # @everyone permission check
-        everyone_role = guild.default_role
 
     def everyone_can_talk(self, ch, everyone_role):
         overwrite = ch.overwrites_for(everyone_role)
@@ -51,6 +48,9 @@ class AkihiroCog(commands.Cog) :
             overwrite.send_messages is not False and
             overwrite.send_messages_in_threads is not False
         )
+        
+        # @everyone permission check
+        everyone_role = guild.default_role
         
         if isinstance(channel, Thread):
             parent = channel.parent
