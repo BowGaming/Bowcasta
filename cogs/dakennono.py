@@ -26,6 +26,14 @@ class AkihiroCog(commands.Cog) :
         self.cooldown_seconds = 60
         self.last_executed = {}
 
+    def everyone_can_talk(self, ch, everyone_role):
+        overwrite = ch.overwrites_for(everyone_role)
+        
+        return (
+            overwrite.send_messages is not False and
+            overwrite.send_messages_in_threads is not False
+        )
+    
     def is_blocked_channel(self, channel):
         guild = channel.guild
     
@@ -40,14 +48,6 @@ class AkihiroCog(commands.Cog) :
             return True
         if isinstance(channel, Thread) and channel.parent and channel.parent.id in self.blocked_forums:
             return True
-
-    def everyone_can_talk(self, ch, everyone_role):
-        overwrite = ch.overwrites_for(everyone_role)
-        
-        return (
-            overwrite.send_messages is not False and
-            overwrite.send_messages_in_threads is not False
-        )
         
         # @everyone permission check
         everyone_role = guild.default_role
