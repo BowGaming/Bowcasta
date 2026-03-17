@@ -16,45 +16,67 @@ class AkihiroCog(commands.Cog) :
             ),
         )
 
-        # Ignored channels due to title reasons
-        self.ignored_channels = {1424723487955619840,689387320142463035,1483188598688976978}
-        self.ignored_forums = {1432707413181599775}
+        # Manual overrides for blocking/allowing channels
+        self.blocked_channels = {}
+        self.allowed_channels = {}
+        self.blocked_forums = {}
+        self.allowed_forums = {}
 
         # Cooldown duration in seconds
         self.cooldown_seconds = 60
         self.last_executed = {}
 
-
+    def is_blocked_channel(self, channel):
+        guild = channel.guild
+    
+        # Manual allowlist
+        if channel.id in self.allowed_channels:
+            return False
+        if isinstance(channel, Thread) and channel.parent and channel.parent.id in self.allowed_forums:
+            return False
+    
+        # Manual blocklist
+        if channel.id in self.blocked_channels:
+            return True
+        if isinstance(channel, Thread) and channel.parent and channel.parent.id in self.blocked_forums:
+            return True
+    
+        # @everyone permission check
+        everyone_role = guild.default_role
+    
+        if isinstance(channel, Thread):
+            parent = channel.parent
+            if parent and parent.permissions_for(everyone_role).send_messages:
+                return True
+        else:
+            if channel.permissions_for(everyone_role).send_messages:
+                return True
+    
+        return False
+    
     @commands.Cog.listener()
     async def on_message(self, message) :
         """Checks messages in the review channel and enforces format."""
         if message.author.bot :
             return
-
-        # Ignore normal channels
-        if isinstance(message.channel, TextChannel):
-            if message.channel.id in self.ignored_channels:
-                return
-        # Ignore threads inside forums
-        if isinstance(message.channel, Thread):
-            if message.channel.parent and message.channel.parent.id in self.ignored_forums:
-                return
             
         if "daken" not in message.content.lower():
             return
 
-        channel_id = message.channel.id
-
-        # cooldown check
-        now = time.time()
-        last_time = self.last_executed.get(channel_id, 0)
-        if now - last_time < self.cooldown_seconds:
-            return  # still in cooldown
-
-        await message.reply(embed=self.akihiro_message)
-
-        # update last time used
-        self.last_executed[channel_id] = now
+        # Ignore normal channels
+        if self.is_blocked_channel(message.channel):
+            channel_id = message.channel.id
+    
+            # cooldown check
+            now = time.time()
+            last_time = self.last_executed.get(channel_id, 0)
+            if now - last_time < self.cooldown_seconds:
+                return  # still in cooldown
+    
+            await message.reply(embed=self.akihiro_message)
+    
+            # update last time used
+            self.last_executed[channel_id] = now
         
 async def setup(bot: commands.Bot) :
     """Standard setup function for discord.py cogs."""
