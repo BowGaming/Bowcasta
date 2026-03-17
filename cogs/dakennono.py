@@ -23,7 +23,7 @@ class AkihiroCog(commands.Cog) :
         self.allowed_forums = {}
 
         # Cooldown duration in seconds
-        self.cooldown_seconds = 60
+        self.cooldown_seconds = 1
         self.last_executed = {}
 
     def everyone_can_talk(self, ch, everyone_role):
