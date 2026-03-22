@@ -4,7 +4,7 @@ from discord import TextChannel, Thread
 import time
 import re
 
-class checkperms(commands.Cog) :
+class CheckpermsCog(commands.Cog) :
     def __init__(self, bot) :
         self.bot = bot
 
@@ -39,4 +39,4 @@ class checkperms(commands.Cog) :
 
 async def setup(bot: commands.Bot) :
     """Standard setup function for discord.py cogs."""
-    await bot.add_cog(AkihiroCog(bot))
+    await bot.add_cog(CheckpermsCog(bot))
