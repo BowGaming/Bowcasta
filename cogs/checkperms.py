@@ -17,7 +17,7 @@ class CheckpermsCog(commands.Cog) :
         if "checkperms" not in message.content.lower():
                 return
           
-        guild = channel.guild
+        guild = message.guild
         everyone = guild.default_role  # @everyone
     
         output = ""
