@@ -29,8 +29,8 @@ class Jocasta(commands.Bot):
             # "cogs.docs",
             "cogs.review",
             "cogs.spoilerthread",
-            # 'cogs.betatesting'
-            # "cogs.dakennono",
+            # "cogs.betatesting",
+            "cogs.dakennono",
             "cogs.checkperms",
         ]
 
