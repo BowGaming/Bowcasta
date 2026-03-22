@@ -27,11 +27,10 @@ class AkihiroCog(commands.Cog) :
         self.last_executed = {}
 
     def everyone_can_talk(self, ch, everyone_role):
-        overwrite = ch.permissions_for(everyone_role)
+        permissions = ch.permissions_for(everyone_role)
         
         return (
-            overwrite.send_messages is not False and
-            overwrite.send_messages_in_threads is not False
+            permissions.send_messages is not False 
         )
     
     def is_blocked_channel(self, channel):
@@ -64,15 +63,14 @@ class AkihiroCog(commands.Cog) :
     
     @commands.Cog.listener()
     async def on_message(self, message) :
-        """Checks messages in the review channel and enforces format."""
+        if "daken" not in message.content.lower():
+            return
+
         if message.author.bot :
             return
 
         # Ignore normal channels
         if not self.is_blocked_channel(message.channel):
-            return
-            
-        if "daken" not in message.content.lower():
             return
 
         channel_id = message.channel.id
