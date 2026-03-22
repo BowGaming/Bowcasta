@@ -17,8 +17,8 @@ class AkihiroCog(commands.Cog) :
         )
 
         # Manual overrides for blocking/allowing channels
-        self.blocked_channels = {}
-        self.allowed_channels = {689387320142463035}
+        self.blocked_channels = {1485365764822270092}
+        self.allowed_channels = {1485365713547034896}
         self.blocked_forums = {}
         self.allowed_forums = {}
 
