@@ -20,7 +20,7 @@ class AkihiroCog(commands.Cog) :
         self.blocked_channels = {1485366876317028504}
         self.allowed_channels = {1485365713547034896}
         self.blocked_forums = {}
-        self.allowed_forums = {}
+        self.allowed_forums = {1485365713547034896}
 
         # Cooldown duration in seconds
         self.cooldown_seconds = 1
