@@ -11,8 +11,11 @@ class AkihiroCog(commands.Cog) :
         # Message
         self.akihiro_message = Embed(
             description=(
-                "Please do not use the name 'Daken' as this is actually a slur.\n"
-                "Instead, use one of these alternatives: Akihiro, Dark Wolverine, Hellverine, Fang."
+                "'Daken' is a derogatory slur used against people who aren't fully Japanese.\n"
+                "While you may not be familiar with this word's origin, it is often considered disrespectful and offensive.\n\n"
+                "The character, Daken, has numerous other names that Marvel comics prefer to use today,\n"
+                "including his given name, **Akihiro**, and 'superhero names' **Dark Wolverine**, **Hellverine**, and **Fang**.\n\n"
+                "We encourage you and the whole Marvel community to use these names instead of 'Daken'."
             ),
         )
 
@@ -29,9 +32,7 @@ class AkihiroCog(commands.Cog) :
     def everyone_can_talk(self, ch, everyone_role):
         permissions = ch.permissions_for(everyone_role)
         
-        return (
-            permissions.send_messages is not False 
-        )
+        return (permissions.send_messages is not False)
     
     def is_blocked_channel(self, channel):
         guild = channel.guild
