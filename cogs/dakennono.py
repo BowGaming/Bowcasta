@@ -63,11 +63,8 @@ class AkihiroCog(commands.Cog) :
     @commands.Cog.listener()
     async def on_message(self, message) :
 
-        pattern = re.compile(
-            r"d\W*a\W*k\W*e\W*n"
-            r"d[\W_]*[a4@][\W_]*k[\W_]*[e3][\W_]*n",
-            re.IGNORECASE | re.DOTALL
-        )
+        pattern = re.compile(r"d\W*a\W*k\W*e\W*n", re.IGNORECASE)
+
         
         if not pattern.search(message.content):
             return
