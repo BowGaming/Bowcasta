@@ -7,6 +7,7 @@ import re
 class AkihiroCog(commands.Cog) :
     def __init__(self, bot) :
         self.bot = bot
+        self.homeserver = 689387320142463032
       
         # Message
         self.akihiro_message = Embed(
@@ -67,6 +68,9 @@ class AkihiroCog(commands.Cog) :
             r"(.*daken.*)",
             re.IGNORECASE
         )
+
+        if message.guil.id != self.homeserver:
+            return
         
         if not pattern.search(message.content):
             return
