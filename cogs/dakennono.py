@@ -69,7 +69,7 @@ class AkihiroCog(commands.Cog) :
             re.IGNORECASE
         )
 
-        if message.guild.id != self.homeserver:
+        if message.guild.id != self.homeserver or message.guild is None:
             return
         
         if not pattern.search(message.content):
